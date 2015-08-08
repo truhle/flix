@@ -8,6 +8,10 @@ describe "Creating a movie" do
     fill_in "Description", with: "Superheroes saving the world from villians."
     fill_in "Total gross", with: "75000000"
     fill_in "Released on", with: (Time.now.year - 1).to_s
+    fill_in "Cast", with: "The award-winning cast"
+    fill_in "Director", with: "The ever creative director"
+    fill_in "Duration", with: "123 min"
+    fill_in "Image file name", with: "movie.png"
 
     click_button 'Create Movie'
 
