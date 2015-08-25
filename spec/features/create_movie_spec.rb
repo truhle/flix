@@ -20,4 +20,27 @@ describe "Creating a movie" do
 
     expect(page).to have_text('New Movie Title')
   end
+
+  it "does not save the movie if it's invalid" do
+    visit new_movie_url
+
+    expect {
+      click_button 'Create Movie'
+    }.not_to change(Movie, :count)
+
+    expect(current_path).to eq(movies_path)
+    expect(page).to have_text('error')
+  end
+
+  it "does not update the movie if it's invalid" do
+    movie = Movie.create(movie_attributes)
+
+    visit edit_movie_url(movie)
+
+    fill_in 'Title', with: " "
+
+    click_button 'Update Movie'
+
+    expect(page).to have_text('error')
+  end
 end

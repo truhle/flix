@@ -2,7 +2,7 @@
 <section id="errors">
   <header>
     <h2>
-      Oops! The <%= @movie.class.name.humanize.downcase %> could not be saved. 
+      Oops! The <%= @movie.class.name.titleize.humanize.downcase %> could not be saved.
     </h2>
     <h3>
       Please correct the following <%= pluralize(@movie.errors.count, "error") %>:
