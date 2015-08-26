@@ -19,6 +19,8 @@ describe "Creating a movie" do
     expect(current_path).to eq(movie_path(Movie.last))
 
     expect(page).to have_text('New Movie Title')
+
+    expect(page).to have_text("Movie successfully created!")
   end
 
   it "does not save the movie if it's invalid" do
