@@ -10,6 +10,8 @@ class Movie < ActiveRecord::Base
   RATINGS = %W(G PG PG-13 R NC-17 NR)
   validates :rating, inclusion: { in: RATINGS }
 
+  has_many :reviews, dependent: :destroy
+
   def flop?
     total_gross.blank? || total_gross < 50_000_000
   end

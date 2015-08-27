@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :reviews
 root "movies#index"
 # get "/movies" => "movies#index"
 # get "/movies/new" => "movies#new"
