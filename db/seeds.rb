@@ -128,9 +128,9 @@ Movie.create!([
 ])
 
 movie = Movie.find_by(title: 'Iron Man')
-movie.reviews.create!(name: "Roger Ebert", stars: 3, comment: "I laughed, I cried, I spilled my popcorn!")
-movie.reviews.create!(name: "Gene Siskel", stars: 5, comment: "I'm a better reviewer than he is.")
-movie.reviews.create!(name: "Peter Travers", stars: 4, comment: "Its been years since a movie superhero was this fierce and funny.")
+movie.reviews.create!(name: "Roger Ebert", stars: 3, comment: "I laughed, I cried, I spilled my popcorn!", location: "Chicago, Illinois")
+movie.reviews.create!(name: "Gene Siskel", stars: 5, comment: "I'm a better reviewer than he is.", location: "Chicago, Illinois")
+movie.reviews.create!(name: "Peter Travers", stars: 4, comment: "Its been years since a movie superhero was this fierce and funny.", location: "New York, New York")
 
 movie = Movie.find_by(title: "Superman")
-movie.reviews.create!(name: "Elvis Mitchell", stars: 5, comment: "It's a bird, it's a plane, it's a blockbuster!")
+movie.reviews.create!(name: "Elvis Mitchell", stars: 5, comment: "It's a bird, it's a plane, it's a blockbuster!", location: "Los Angeles, California")

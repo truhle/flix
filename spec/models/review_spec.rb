@@ -31,7 +31,7 @@ describe "A review" do
   end
 
   it 'requires a comment over 3 characters' do
-    review = Review.new(comment: a * 3)
+    review = Review.new(comment: "a" * 3)
 
     review.valid?
 
@@ -58,6 +58,26 @@ describe "A review" do
 
       expect(review.errors[:stars].any?).to eq(true)
       expect(review.errors[:stars].first).to eq("must be between 1 and 5")
+    end
+  end
+
+  it 'accepts valid "city, state" locations' do
+    locations = ["New York, New York", "Los Angeles, CA", "Chicago, Illinois"]
+
+    locations.each do |location|
+      review = Review.new(location: location)
+      review.valid?
+      expect(review.errors[:location].any?).to eq(false)
+    end
+  end
+
+  it 'rejects invalid "city, state" locations' do
+    locations = ["New York, ", " , CA", "Chicago"]
+
+    locations.each do |location|
+      review = Review.new(location: location)
+      review.valid?
+      expect(review.errors[:location].any?).to eq(true)
     end
   end
 end

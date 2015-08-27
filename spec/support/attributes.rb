@@ -16,6 +16,7 @@ def review_atttributes(overrides = {})
   {
     name: "Roger Ebert",
     stars: 3,
-    comment: " I laughed, I cried, I spilled my popcorn!"
+    comment: " I laughed, I cried, I spilled my popcorn!",
+    location: "Chicago, Illinois"
   }.merge(overrides)
 end

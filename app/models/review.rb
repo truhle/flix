@@ -5,7 +5,8 @@ class Review < ActiveRecord::Base
   validates :stars, inclusion: {
     in: STARS,
     message: "must be between 1 and 5"
-  } 
+  }
+  validates :location, format: /\S+, \S+/
 
   belongs_to :movie
 end
