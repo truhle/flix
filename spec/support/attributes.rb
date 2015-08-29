@@ -12,7 +12,7 @@ def movie_attributes(overrides ={})
   }.merge(overrides)
 end
 
-def review_atttributes(overrides = {})
+def review_attributes(overrides = {})
   {
     name: "Roger Ebert",
     stars: 3,

@@ -143,8 +143,8 @@ describe "A movie" do
   it "has many reviews" do
     movie = Movie.new(movie_attributes)
 
-    review1 = movie.reviews.new(review_atttributes)
-    review2 = movie.reviews.new(review_atttributes)
+    review1 = movie.reviews.new(review_attributes)
+    review2 = movie.reviews.new(review_attributes)
 
     expect(movie.reviews).to include(review1)
     expect(movie.reviews).to include(review2)
@@ -153,7 +153,7 @@ describe "A movie" do
   it "deletes associated reviews" do
     movie = Movie.create(movie_attributes)
 
-    movie.reviews.create(review_atttributes)
+    movie.reviews.create(review_attributes)
 
     expect {
       movie.destroy

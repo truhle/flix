@@ -3,13 +3,13 @@ describe "A review" do
   it 'belongs to a movie' do
     movie = Movie.create(movie_attributes)
 
-    review = movie.reviews.new(review_atttributes)
+    review = movie.reviews.new(review_attributes)
 
     expect(review.movie).to eq(movie)
   end
 
   it "is valid with example attributes" do
-    review = Review.new(review_atttributes)
+    review = Review.new(review_attributes)
 
     expect(review.valid?).to eq(true)
   end
