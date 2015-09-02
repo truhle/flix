@@ -10,7 +10,7 @@ describe "Creating a new review" do
 
     fill_in "Name", with: "Roger Ebert"
     fill_in "Location", with: "Chicago, IL"
-    select 3, :from => "review_stars"
+    choose "review_stars_3"
     fill_in "Comment", with: "I laughed, I cried, I spilled my popcorn!"
 
     click_button 'Post Review'

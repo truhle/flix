@@ -6,7 +6,10 @@ class Review < ActiveRecord::Base
     in: STARS,
     message: "must be between 1 and 5"
   }
-  validates :location, format: /\S+, \S+/
+  validates :location, format: {
+    with: /\S+, \S+/,
+    message: "must be in 'City, State' format"
+    }
 
   belongs_to :movie
 end
