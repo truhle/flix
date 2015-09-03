@@ -16,6 +16,10 @@ class Movie < ActiveRecord::Base
     total_gross.blank? || total_gross < 50_000_000
   end
 
+  def average_stars
+    reviews.average(:stars)
+  end
+
   def self.released
     where("released_on < ?", Time.now).order("released_on desc")
   end
