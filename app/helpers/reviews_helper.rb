@@ -4,7 +4,8 @@ module ReviewsHelper
     if movie.average_stars.nil?
       content_tag(:strong, "No reviews")
     else
-      pluralize(number_with_precision(movie.average_stars, precision: 1), "star")
+      # pluralize(number_with_precision(movie.average_stars, precision: 1), "star")
+      content_tag(:strong, "*" * movie.average_stars.round)
     end
   end
 end

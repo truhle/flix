@@ -13,7 +13,11 @@ class Movie < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
 
   def flop?
-    total_gross.blank? || total_gross < 50_000_000
+    if reviews.any?
+      average_stars < 4 && ( total_gross.blank? || total_gross < 50_000_000 )
+    else
+      total_gross.blank? || total_gross < 50_000_000
+    end
   end
 
   def average_stars
@@ -34,6 +38,10 @@ class Movie < ActiveRecord::Base
 
   def self.recently_added
     order("created_at desc").limit(3)
+  end
+
+  def recent_reviews
+    reviews.order("created_at desc").limit(2)
   end
 end
 

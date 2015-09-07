@@ -28,13 +28,32 @@
     <%= format_total_gross(@movie) %>
   </p>
   <h3>Average Review</h3>
-  <p>
-    <%= format_average_stars(@movie) %>
-  </p>
-  <p>
-    <%= link_to pluralize(@movie.reviews.size, "review"),
-                  movie_reviews_path(@movie) %>
-  </p>
+  <% if @movie.reviews.any? %>
+    <p>
+      <%= format_average_stars(@movie) %>
+    </p>
+    <h3>Recent Reviews</h3>
+    <ol id="reviews">
+      <% @movie.recent_reviews.each do |review| %>
+        <li>
+          <span class="review"><%= pluralize(review.stars, 'star') %></span>
+          <span class="user">by <%= review.name %></span>
+          <span class="date"><%= time_ago_in_words(review.created_at) %> ago</span>
+          <p>
+            &quot;<%= review.comment %>&quot;
+          </p>
+        </li>
+      <% end %>
+    </ol>
+    <p>
+      Read all: <%= link_to pluralize(@movie.reviews.size, "review"),
+                    movie_reviews_path(@movie) %>
+    </p>
+  <% else %>
+    <p>
+      No reviews yet.
+    </p>
+  <% end %>
   <footer>
     <%= link_to "Write Review", new_movie_review_path(@movie),
                 class: "button ok review" %>

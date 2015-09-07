@@ -8,8 +8,9 @@
       <span class="review"><%= pluralize(review.stars, 'star') %></span>
       <span class="user">by <%= review.name %></span>
       <span class="date"><%= time_ago_in_words(review.created_at) %> ago</span>
+      <span> </span>
       <p>
-        &quot;<%= review.comment %>&quot;
+        &quot;<%= review.comment %>&quot; | <%= link_to "delete", movie_review_path(@movie, review), method: :delete, data: { confirm: "Are you sure?" }  %>
       </p>
     </li>
   <% end %>
