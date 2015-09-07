@@ -10,7 +10,9 @@
       <span class="date"><%= time_ago_in_words(review.created_at) %> ago</span>
       <span> </span>
       <p>
-        &quot;<%= review.comment %>&quot; | <%= link_to "delete", movie_review_path(@movie, review), method: :delete, data: { confirm: "Are you sure?" }  %>
+        &quot;<%= review.comment %>&quot;
+        | <%= link_to "delete", movie_review_path(@movie, review), method: :delete, data: { confirm: "Are you sure?" }  %>
+        | <%= link_to "update", edit_movie_review_path(@movie, review) %>
       </p>
     </li>
   <% end %>
