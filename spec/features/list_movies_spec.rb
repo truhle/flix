@@ -35,7 +35,7 @@ describe "Viewing the list of movies" do
                           duration: "121 min",
                           image: open("#{Rails.root}/app/assets/images/spiderman.jpg")
                           )
-                          
+
     visit movies_url
 
     expect(page).to have_text(movie1.title)
@@ -48,7 +48,7 @@ describe "Viewing the list of movies" do
     expect(page).to have_text("$318,412,101.00")
     expect(page).to have_text(movie1.cast)
     expect(page).to have_text(movie1.duration)
-    expect(page).to have_selector("img[src$='#{movie1.image.url}']")
+    expect(page).to have_selector("img[src$='#{movie1.image.url(:small)}']")
   end
 
   it "does not show a movie that hasn't yet been released" do
