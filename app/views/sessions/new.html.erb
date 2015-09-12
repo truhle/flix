@@ -6,8 +6,8 @@
   <fieldset>
     <ol>
       <li class="required">
-        <%= label_tag :email %>
-        <%= email_field_tag :email, nil, autofocus: true, size: 40, required: true %>
+        <%= label_tag :username_or_email %>
+        <%= text_field_tag :username_or_email, nil, autofocus:true, size: 40, required: true %>
       </li>
       <li class="required">
         <%= label_tag :password %>

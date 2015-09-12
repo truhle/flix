@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
                     format: /\A\w+$\z/,
                     uniqueness: { case_sensitive: false }
 
+  def self.authenticate(username_or_email, password)
+    user = User.find_by(email: username_or_email) || user = User.find_by(username: username_or_email)
+    user && user.authenticate(password)
+  end
+
   def gravatar_id
     Digest::MD5::hexdigest(email.downcase)
   end
