@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
 
   def create
-    fail
+    params[:email]
+    params[:password]
   end
 
   def new
