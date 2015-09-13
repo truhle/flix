@@ -41,4 +41,34 @@ describe UsersController do
       expect(response).to redirect_to(signin_url)
     end
   end
+
+  context "when signed in as user other than the user being interacted with" do
+
+    before do
+      @other_user = User.create!(user_attributes(username: "other_user", email: "other@example.com"))
+      session[:user_id] = @other_user.id
+    end
+
+    it 'cannot access another user' do
+      patch :update, id: @user
+
+      expect(response).to redirect_to(root_url)
+    end
+
+    it 'cannot access another user' do
+      delete :destroy, id: @user
+
+      expect(response).to redirect_to(root_url)
+    end
+
+    it 'cannot access another user' do
+      get :edit, id: @user
+
+      expect(response).to redirect_to(root_url)
+    end
+
+
+
+
+  end
 end

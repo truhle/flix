@@ -47,4 +47,17 @@ describe "Signing in" do
     expect(page).to have_link("Sign In")
     expect(page).to have_link("Sign Up")
   end
+
+  it 'redirects to intended url after sign in' do
+    user = User.create!(user_attributes)
+
+    visit users_url
+
+    fill_in "Username or email", with: user.email
+    fill_in "Password", with: user.password
+
+    click_button "Sign In"
+
+    expect(current_path).to eq(users_path)
+  end
 end
