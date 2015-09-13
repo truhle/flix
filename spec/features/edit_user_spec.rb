@@ -3,6 +3,8 @@ describe "editing a user" do
   it "updates the user and shows the user's updated details" do
     user = User.create!(user_attributes)
 
+    sign_in(user)
+
     visit user_url(user)
 
     click_link 'Edit Account'
@@ -23,6 +25,8 @@ describe "editing a user" do
 
   it "does not update a user if the new info is invalid" do
     user = User.create!(user_attributes)
+
+    sign_in(user)
 
     visit edit_user_url(user)
 
