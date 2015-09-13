@@ -3,7 +3,7 @@ describe "Deleting a user" do
   it 'destroys the user and redirects to the home page' do
     user = User.create!(user_attributes)
 
-    visit user_path(user)
+    sign_in(user)
 
     click_link 'Delete Account'
 
