@@ -1,9 +1,15 @@
 describe "Deleting a user" do
 
+  before do
+    admin = User.create!(user_attributes(name: "admin", username: "admin", email: "admin@example.com", admin: true))
+
+    sign_in(admin)
+  end
+
   it 'destroys the user and redirects to the home page' do
     user = User.create!(user_attributes)
 
-    sign_in(user)
+    visit user_path(user)
 
     click_link 'Delete Account'
 

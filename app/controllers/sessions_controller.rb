@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       redirect_to(session[:intended_url] || user)
       session[:intended_url] = nil
     else
-      flash.now[:alert] = "Invalid email/password combination."
+      flash.now[:alert] = "Invalid username/email and password combination."
       render "new"
     end
   end
