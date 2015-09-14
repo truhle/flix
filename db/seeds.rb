@@ -127,10 +127,41 @@ Movie.create!([
   }
 ])
 
-movie = Movie.find_by(title: 'Iron Man')
-movie.reviews.create!(name: "Roger Ebert", stars: 3, comment: "I laughed, I cried, I spilled my popcorn!", location: "Chicago, Illinois")
-movie.reviews.create!(name: "Gene Siskel", stars: 5, comment: "I'm a better reviewer than he is.", location: "Chicago, Illinois")
-movie.reviews.create!(name: "Peter Travers", stars: 4, comment: "Its been years since a movie superhero was this fierce and funny.", location: "New York, New York")
+User.create!([
+  {
+    name: "Roger",
+    username: "ebert",
+    email: "roger@example.com",
+    password: "secret",
+    password_confirmation: "secret"
+  },
+  {
+    name: "Gene",
+    username: "siskel",
+    email: "gene@example.com",
+    password: "secret",
+    password_confirmation: "secret"
+  },
+  {
+    name: "Efren",
+    username: "bata",
+    email: "efren@example.com",
+    password: "secret",
+    password_confirmation: "secret"
+  }
+])
 
-movie = Movie.find_by(title: "Superman")
-movie.reviews.create!(name: "Elvis Mitchell", stars: 5, comment: "It's a bird, it's a plane, it's a blockbuster!", location: "Los Angeles, California")
+movie = Movie.find_by(title: 'Iron Man')
+movie.reviews.create!(user_id: 1 , stars: 3, comment: "I laughed, I cried, I spilled my popcorn!", location: "Chicago, Illinois")
+movie.reviews.create!(user_id: 2, stars: 5, comment: "I'm a better reviewer than he is.", location: "Chicago, Illinois")
+movie.reviews.create!(user_id: 3, stars: 4, comment: "Its been years since a movie superhero was this fierce and funny.", location: "New York, New York")
+
+movie.fans << User.find(1)
+movie.fans << User.find(2)
+
+movie2 = Movie.find_by(title: "Superman")
+movie2.reviews.create!(user_id: 3, stars: 5, comment: "It's a bird, it's a plane, it's a blockbuster!", location: "Los Angeles, California")
+
+movie2.fans << User.find(1)
+movie2.fans << User.find(2)
+movie2.fans << User.find(3)

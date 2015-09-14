@@ -164,4 +164,16 @@ describe "Authenticate" do
     expect(@user.reviews).to include(review1)
     expect(@user.reviews).to include(review2)
   end
+
+  it 'has favorite movies' do
+    fan = User.new(user_attributes)
+    movie1 = Movie.new(movie_attributes(title: "Iron Man"))
+    movie2 = Movie.new(movie_attributes(title: "Spiderman"))
+
+    fan.favorites.new(movie: movie1)
+    fan.favorites.new(movie: movie2)
+
+    expect(fan.favorite_movies).to include(movie1)
+    expect(fan.favorite_movies).to include(movie2)
+  end
 end

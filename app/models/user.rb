@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
 
   has_many :reviews, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_movies, through: :favorites, source: :movie
 
   def self.authenticate(username_or_email, password)
     user = User.find_by(email: username_or_email) || user = User.find_by(username: username_or_email)
