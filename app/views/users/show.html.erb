@@ -8,6 +8,21 @@
         <%= @user.created_at.strftime("%B %Y") %>
       </p>
   </header>
+  <% if @reviews.any? %>
+    <h3>Reviews</h3>
+    <ol id="reviews">
+      <% @reviews.each do |r| %>
+        <li>
+          <%= link_to r.movie.title, r.movie %>
+          <span class="review"><%= pluralize(r.stars, "star") %></span>
+          <span class="date">(<%= time_ago_in_words(r.created_at) %> ago)</span>
+          <p>
+            &quot;<%= r.comment %>&quot;
+          </p>
+        </li>
+      <% end %>
+    </ol>
+  <% end %>
   <% if current_user?(@user) %>
     <%= link_to "Edit Account", edit_user_path(@user), class: 'button' %>
   <% end %>
