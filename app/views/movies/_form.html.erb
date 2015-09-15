@@ -34,6 +34,9 @@
         <%= image_for(@movie) %>
       </li>
       <li>
+        <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name) %>
+      </li>
+      <li>
         <%= f.label :cast %>
         <%= f.text_field :cast %>
       </li>

@@ -165,3 +165,6 @@ movie2.reviews.create!(user_id: 3, stars: 5, comment: "It's a bird, it's a plane
 movie2.fans << User.find(1)
 movie2.fans << User.find(2)
 movie2.fans << User.find(3)
+
+genres = %w[ Action Comedy Drama Romance Thriller Fantasy Documentary Adventure Animation Sci-Fi ]
+genres.each { |g| Genre.create!(name: g) }

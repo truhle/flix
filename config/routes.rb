@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+resources :genres
 resource :session
 get "signup" => 'users#new'
 get "signin" => 'sessions#new'
