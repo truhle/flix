@@ -11,4 +11,12 @@ module ApplicationHelper
   def title(title)
     content_for(:title, title)
   end
+
+  def nav_link_to(name, path)
+    if current_page?(path)
+      link_to name, path, class: 'button active'
+    else
+      link_to name, path, class: 'button'
+    end
+  end
 end

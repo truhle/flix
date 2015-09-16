@@ -165,10 +165,12 @@ ol#reviews {
         font-weight: bold;
       }
       &.user {
+        font-size: .9em;
         font-weight: normal;
+        color: $secondary-text-color;
       }
       &.date {
-        font-size: .9em;
+        font-size: .8em;
         font-weight: bold;
         color: $secondary-text-color;
       }
@@ -176,6 +178,34 @@ ol#reviews {
 
     p {
       font-size: .95em;
+    }
+  }
+}
+
+/* FAVORITES */
+
+ol#favorites {
+  font-size: 1.15em;
+  list-style: none;
+  padding: 0;
+
+  li {
+    margin: 1em 0;
+
+    span {
+      &.date {
+        font-size: .75em;
+        color: $secondary-text-color;
+      }
+    }
+
+    a {
+      font-weight: normal;
+    }
+
+    img {
+      margin-right: 5px;
+      vertical-align: middle;
     }
   }
 }
@@ -197,10 +227,6 @@ ol#reviews {
 
   &.alert {
     background-color: $flash-alert-color;
-  }
-
-  &.danger {
-    background-color: $flash-danger-color;
   }
 }
 

@@ -112,6 +112,11 @@ aside#sidebar {
     text-transform: uppercase;
   }
 
+  h3 {
+    font-size: 110%;
+    border-bottom: 1px solid $subdued-color;
+  }
+
   a,
   a:link,
   a:visited {
@@ -128,7 +133,7 @@ aside#sidebar {
         padding: 4px 0;
         padding-left: 25px;
 
-        &.all-movies a {
+        &.movies a {
           display: block;
           background: image-url("arrow.png") no-repeat 10px 8px;
           padding-left: 35px;
@@ -145,6 +150,10 @@ aside#sidebar {
           color: #000;
         }
 
+        a.active {
+          background-color: $subdued-color;
+          color: #000;
+        }
       }
     }
   }
