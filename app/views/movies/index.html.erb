@@ -30,3 +30,13 @@
     </li>
   <% end %>
 </ul>
+<% content_for(:side) do %>
+  <h3>Genres</h3>
+  <ul id="genres">
+    <% @genres.each do |genre| %>
+      <li>
+        <span><%= link_to genre.name, genre %></span>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
