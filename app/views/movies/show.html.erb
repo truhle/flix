@@ -1,3 +1,5 @@
+<% content_for(:title, @movie.title) %>
+
 <article id="movie" class="movie">
   <header>
     <%= image_for(@movie) %>
@@ -24,23 +26,6 @@
       <%= button_to "Fave", movie_favorites_path(@movie), class: "button fave"  %>
     <% end %>
   <% end %>
-  <% if @fans.any? %>
-    <h3>Fans</h3>
-    <ul>
-      <% @fans.each do |fan| %>
-        <li>
-          <%= profile_image_for(fan, size: 35) %>
-          <%= link_to fan.name, fan %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-  <h3>Genres</h3>
-  <ul>
-    <% @genres.each do |genre| %>
-      <li><%= link_to genre.name, genre %></li>
-    <% end %>
-  </ul>
 
   <h3>Cast</h3>
   <p>
@@ -95,4 +80,23 @@
       <% end %>
     </nav>
   </footer>
+  <% content_for(:side) do %>
+    <% if @fans.any? %>
+      <h3>Fans</h3>
+      <ul>
+        <% @fans.each do |fan| %>
+          <li>
+            <%= profile_image_for(fan, size: 35) %>
+            <%= link_to fan.name, fan %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+    <h3>Genres</h3>
+    <ul>
+      <% @genres.each do |genre| %>
+        <li><%= link_to genre.name, genre %></li>
+      <% end %>
+    </ul>
+  <% end %>
 </article>
