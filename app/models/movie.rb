@@ -1,5 +1,5 @@
 class Movie < ActiveRecord::Base
-  has_many :reviews, dependent: :destroy
+  has_many :reviews, -> { order(created_at: :desc) }, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :fans, through: :favorites, source: :user
   has_many :critics, through: :reviews, source: :user
@@ -19,6 +19,15 @@ class Movie < ActiveRecord::Base
   RATINGS = %W(G PG PG-13 R NC-17 NR)
   validates :rating, inclusion: { in: RATINGS }
 
+  scope :released, -> { where("released_on < ?", Time.now).order("released_on desc") }
+  scope :hits, -> { released.where("total_gross >= ?", 300_000_000).order("total_gross desc") }
+  scope :flops, -> { released.where("total_gross < ?", 50_000_000).order("total_gross") }
+  scope :upcoming, -> { where("released_on > ?", Time.now).order(released_on: :asc)}
+  scope :rated, ->(rating) { released.where(rating: rating) }
+  scope :recent, ->(max=5) { released.limit(max) }
+  scope :grossed_less_than, ->(amount) { where("total_gross < ?", amount) }
+  scope :grossed_greater_than, ->(amount) { where("total_gross > ?", amount) }
+
 
   def flop?
     if reviews.any?
@@ -30,18 +39,6 @@ class Movie < ActiveRecord::Base
 
   def average_stars
     reviews.average(:stars)
-  end
-
-  def self.released
-    where("released_on < ?", Time.now).order("released_on desc")
-  end
-
-  def self.hits
-    where("total_gross >= ?", 300_000_000).order("released_on desc")
-  end
-
-  def self.flops
-    where("total_gross < ?", 50_000_000).order("total_gross")
   end
 
   def self.recently_added

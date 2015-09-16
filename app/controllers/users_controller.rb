@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.not_admins
   end
 
   def new

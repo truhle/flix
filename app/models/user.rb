@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+  has_many :reviews, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_movies, through: :favorites, source: :movie
+
   validates :name, presence:true
   validates :email, presence:true,
                     format: /\A\S+@.+\.\S+\z/,
@@ -10,9 +14,8 @@ class User < ActiveRecord::Base
                     format: /\A\w+$\z/,
                     uniqueness: { case_sensitive: false }
 
-  has_many :reviews, dependent: :destroy
-  has_many :favorites, dependent: :destroy
-  has_many :favorite_movies, through: :favorites, source: :movie
+  scope :by_name, -> { order(:name) }
+  scope :not_admins, -> { by_name.where(admin: false)}
 
   def self.authenticate(username_or_email, password)
     user = User.find_by(email: username_or_email) || user = User.find_by(username: username_or_email)

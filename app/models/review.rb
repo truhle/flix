@@ -1,4 +1,8 @@
 class Review < ActiveRecord::Base
+
+  belongs_to :movie
+  belongs_to :user
+
   validates :comment, length: { minimum: 4 }
   STARS = [1, 2, 3, 4, 5]
   validates :stars, inclusion: {
@@ -10,6 +14,5 @@ class Review < ActiveRecord::Base
     message: "must be in 'City, State' format"
     }
 
-  belongs_to :movie
-  belongs_to :user
+  scope :past_n_days, ->(n) { where("created_at >= ?", n.days.ago) }
 end
