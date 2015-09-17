@@ -4,17 +4,18 @@
       <li class="all-movies">
         <%= nav_link_to "Released", movies_path %>
       </li>
-      <li class="all-movies">
-        <%= nav_link_to "Hits", filtered_movies_path(:hits) %>
-      </li>
-      <li class="all-movies">
-        <%= nav_link_to "Flops", filtered_movies_path(:flops) %>
-      </li>
+
       <li class="all-movies">
         <%= nav_link_to "Upcoming", filtered_movies_path(:upcoming) %>
       </li>
       <li class="all-movies">
         <%= nav_link_to "Recent", filtered_movies_path(:recent) %>
+      </li>
+      <li class="all-movies">
+        <%= nav_link_to "Hits", filtered_movies_path(:hits) %>
+      </li>
+      <li class="all-movies">
+        <%= nav_link_to "Flops", filtered_movies_path(:flops) %>
       </li>
       <% if current_user_admin? %>
       <li class="create-movie">
