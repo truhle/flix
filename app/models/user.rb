@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
                     format: /\A\w+$\z/,
                     uniqueness: { case_sensitive: false }
 
+  before_save :format_email
+  before_save :format_username
+  before_save :set_slug
+
   scope :by_name, -> { order(:name) }
   scope :not_admins, -> { by_name.where(admin: false)}
 
@@ -22,7 +26,23 @@ class User < ActiveRecord::Base
     user && user.authenticate(password)
   end
 
+  def format_email
+    self.email = email.downcase
+  end
+
+  def format_username
+    self.username = username.downcase
+  end
+
   def gravatar_id
     Digest::MD5::hexdigest(email.downcase)
+  end
+
+  def set_slug
+    self.slug = username
+  end
+
+  def to_param
+    username
   end
 end

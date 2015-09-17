@@ -44,6 +44,12 @@
         <%= f.label :director %>
         <%= f.text_field :director %>
       </li>
+      <% unless @movie.new_record? %>
+        <li>
+        <%= f.label :slug %>
+        <%= f.text_field :slug %>
+        </li>
+      <% end %>
     </ol>
     <p>
       <%= f.submit %>
