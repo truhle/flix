@@ -59,4 +59,12 @@ describe "Viewing a movie page" do
     expect(page).to have_title("Flix - #{movie.title}")
   end
 
+  it 'has an SEO-friendly URL' do
+    movie = Movie.create!(movie_attributes)
+
+    visit movie_url(movie)
+
+    expect(current_path).to eq("/movies/#{movie.title.parameterize}")
+  end
+
 end

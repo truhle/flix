@@ -10,7 +10,11 @@ class Movie < ActiveRecord::Base
     thumb: "50x50>"
   }
 
-  validates :title, :released_on, :duration, presence: true
+  before_validation :generate_slug
+
+  validates :released_on, :duration, presence: true
+  validates :title, presence: true, uniqueness: true
+  validates :slug, uniqueness: true
   validates :description, length: { minimum: 25 }
   validates :total_gross, numericality: { greater_than_or_equal_to: 0 }
   validates_attachment :image,
@@ -27,7 +31,7 @@ class Movie < ActiveRecord::Base
   scope :recent, ->(max=5) { released.limit(max) }
   scope :grossed_less_than, ->(amount) { where("total_gross < ?", amount) }
   scope :grossed_greater_than, ->(amount) { where("total_gross > ?", amount) }
-
+  scope :recently_added, -> { order("created_at desc").limit(3) }
 
   def flop?
     if reviews.any?
@@ -41,13 +45,15 @@ class Movie < ActiveRecord::Base
     reviews.average(:stars)
   end
 
-  def self.recently_added
-    order("created_at desc").limit(3)
+  def generate_slug
+    self.slug ||= title.parameterize if title
   end
 
   def recent_reviews
     reviews.order("created_at desc").limit(2)
   end
-end
 
-Movie.released.flops
+  def to_param
+    slug
+  end
+end

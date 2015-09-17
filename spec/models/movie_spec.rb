@@ -26,9 +26,9 @@ describe "A movie" do
   end
 
   it 'lists released movies in order from the most recent first' do
-    movie1 = Movie.create(movie_attributes(released_on: 2.months.ago))
-    movie2 = Movie.create(movie_attributes(released_on: 1.month.ago))
-    movie3 = Movie.create(movie_attributes(released_on: 1.week.ago))
+    movie1 = Movie.create(movie_attributes(released_on: 2.months.ago, title: "1"))
+    movie2 = Movie.create(movie_attributes(released_on: 1.month.ago, title: "2"))
+    movie3 = Movie.create(movie_attributes(released_on: 1.week.ago, title: "3"))
 
     released_movies = Movie.released
     expect(released_movies).to eq([movie3, movie2, movie1])
@@ -186,15 +186,37 @@ describe "A movie" do
     expect(movie.fans).to include(fan2)
   end
 
+  it 'generates a slug attribute for URLs when it is saved' do
+    movie = Movie.create!(movie_attributes)
+
+    expect(movie.slug).to eq(movie.title.parameterize)
+  end
+
+  it 'requires a unique title' do
+    movie1 = Movie.create!(movie_attributes)
+
+    movie2 = Movie.new(movie_attributes(title: movie1.title))
+    movie2.valid?
+    expect(movie2.errors[:title].first).to eq("has already been taken")
+  end
+
+  it 'requires a unique slug' do
+    movie1 = Movie.create!(movie_attributes)
+
+    movie2 = Movie.new(movie_attributes(slug: movie1.slug))
+    movie2.valid?
+    expect(movie2.errors[:slug].first).to eq("has already been taken")
+  end
+
   context "recent query" do
     before do
-      @movie1 = Movie.create!(movie_attributes(released_on: 3.months.ago))
-      @movie2 = Movie.create!(movie_attributes(released_on: 2.months.ago))
-      @movie3 = Movie.create!(movie_attributes(released_on: 1.month.ago))
-      @movie4 = Movie.create!(movie_attributes(released_on: 1.week.ago))
-      @movie5 = Movie.create!(movie_attributes(released_on: 1.day.ago))
-      @movie6 = Movie.create!(movie_attributes(released_on: 1.hour.ago))
-      @movie7 = Movie.create!(movie_attributes(released_on: 1.day.from_now))
+      @movie1 = Movie.create!(movie_attributes(released_on: 3.months.ago, title: "1"))
+      @movie2 = Movie.create!(movie_attributes(released_on: 2.months.ago, title: "2"))
+      @movie3 = Movie.create!(movie_attributes(released_on: 1.month.ago, title: "3"))
+      @movie4 = Movie.create!(movie_attributes(released_on: 1.week.ago, title: "4"))
+      @movie5 = Movie.create!(movie_attributes(released_on: 1.day.ago, title: "5"))
+      @movie6 = Movie.create!(movie_attributes(released_on: 1.hour.ago, title: "6"))
+      @movie7 = Movie.create!(movie_attributes(released_on: 1.day.from_now, title: "7"))
     end
 
     it 'returns a specified number of released movies ordered with the most recent movie first' do

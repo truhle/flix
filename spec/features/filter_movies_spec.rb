@@ -2,7 +2,7 @@ describe "Filtering movies" do
 
   it 'shows hits' do
     hit = Movie.create!(movie_attributes(total_gross: 301_000_000))
-    flop = Movie.create!(movie_attributes(total_gross: 1_000_000))
+    flop = Movie.create!(movie_attributes(total_gross: 1_000_000, title: "Other Movie"))
 
     visit movies_url
     click_link "Hits"
@@ -14,7 +14,7 @@ describe "Filtering movies" do
 
   it 'shows flops' do
     hit = Movie.create!(movie_attributes(total_gross: 301_000_000))
-    flop = Movie.create!(movie_attributes(total_gross: 1_000_000))
+    flop = Movie.create!(movie_attributes(total_gross: 1_000_000, title: "Other Movie"))
 
     visit movies_url
     click_link "Flops"
@@ -26,7 +26,7 @@ describe "Filtering movies" do
 
   it 'shows upcoming movies' do
     recent = Movie.create!(movie_attributes(released_on: 1.day.ago))
-    upcoming = Movie.create!(movie_attributes(released_on: 1.day.from_now))
+    upcoming = Movie.create!(movie_attributes(released_on: 1.day.from_now, title: "Other Movie"))
 
     visit movies_url
     click_link "Upcoming"
@@ -38,7 +38,7 @@ describe "Filtering movies" do
 
   it 'shows recent movies' do
     recent = Movie.create!(movie_attributes(released_on: 1.day.ago))
-    upcoming = Movie.create!(movie_attributes(released_on: 1.day.from_now))
+    upcoming = Movie.create!(movie_attributes(released_on: 1.day.from_now, title: "Other Movie"))
 
     visit movies_url
     click_link "Recent"
